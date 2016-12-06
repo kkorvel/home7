@@ -6,7 +6,8 @@ class Puzzle {
    public static void permute(int n, int k) {
       permute(n, k, new HashSet<Integer>(), new int[k]);
    }
-   private static int lahenduseLugeja = 0;
+   private static long lahenduseLugeja = 0;
+
 
    public static void permute(int n, int k, HashSet<Integer> set, int[] permutation) {
       if (set.size() == k)
@@ -24,16 +25,16 @@ class Puzzle {
 
    public static void doPermute(int n, int k, HashSet<Integer> set, int[] permutation) {
       HashMap<Character,Integer> charmap = new HashMap<Character,Integer>();
-      lahenduseLugeja = 0;
+     // lahenduseLugeja = 0;
       for (int i=0; i<k; i++)
          charmap.put(letters.charAt(i), // "SENDMORY";
                  permutation[i]);   // [2, 3, 1, 4, 0, 5,... ]
-      int[] values = new int[3];
+      long[] values = new long[3];
       for (int j=0; j<3; j++) {
          String word = words[j];
          if (charmap.get(word.charAt(0)) == 0)
             return;
-         int val = 0;
+         long val = 0;
          for (int i=0; i<word.length(); i++)
             val = 10 * val + charmap.get(word.charAt(i));
          values[j] = val;
@@ -51,7 +52,7 @@ class Puzzle {
    private static String[] words;
 
    public static void cryptarithm(String s1, String s2, String s3) {
-     //lahenduseLugeja = 0;
+     lahenduseLugeja = 0;
       words = new String[3];
       words[0] = s1;
       System.out.println(s1);
@@ -71,10 +72,12 @@ class Puzzle {
    }
 
    public static void main(String[] args) {
+      //lahenduseLugeja = 0;
        cryptarithm("SEND","MORE","MONEY");
-      cryptarithm("IDAHO","NEVADA","STATES");
-      cryptarithm("SIENNA","SILVER","COLORS");
-      cryptarithm("RENOIR","SEURAT","GAUGUIN");
+//      cryptarithm("IDAHO","NEVADA","STATES");
+//      cryptarithm("SIENNA","SILVER","COLORS");
+     // cryptarithm("RENOIR","SEURAT","GAUGUIN"); // E ja O
+       cryptarithm(args[0],args[1],args[2]);
       if (words.length != 3)
          throw new RuntimeException("Peab olema 3 parameetrit!");
       for (String s : words){
